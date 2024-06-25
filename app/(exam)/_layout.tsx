@@ -1,14 +1,12 @@
-import store from "@/redux/store";
 import { Stack } from "expo-router";
-import { Provider } from "react-redux";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
   return (
-    <Provider store={store}>
+    <GestureHandlerRootView>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="(dashboard)" />
       </Stack>
-    </Provider>
+    </GestureHandlerRootView>
   );
 }
