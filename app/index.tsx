@@ -49,7 +49,7 @@ SplashScreen.preventAutoHideAsync();
 const LoginScreen: React.FunctionComponent<LoginScreenState> = (
   props: LoginScreenProps
 ) => {
-  const { } = props;
+  const {} = props;
   const [isLoading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
@@ -132,6 +132,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
       } else {
         setAppIsReady(true);
         await SplashScreen.hideAsync();
+        router.replace("/(dashboard)");
       }
     } catch (error) {
       console.log(error);
@@ -283,7 +284,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
               title={"Forgot Password ?"}
               titleStyle={{ color: "white" }}
               buttonStyle={{ backgroundColor: "transparent" }}
-              onPress={() => { }}
+              onPress={() => {}}
             />
           </View>
         </View>

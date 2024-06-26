@@ -1,11 +1,26 @@
 import { ScrollView, View, Image, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Badge, Card, Header, Icon, Text } from "@rneui/base";
 import PreApproveIcon from "@/components/PreApproveIcon";
+import DailyHelpIcon from "@/components/DailyHelp";
+import styles from "./index.styles";
+import BottomSheetComponent from "@/components/BottomsheetComponent";
+import { SafeAreaView } from "react-native-safe-area-context";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
 
 const Dashboard = () => {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const openBottomSheet = (index: number) => {
+    console.log('index', index)
+    bottomSheetRef.current?.snapToIndex(index);
+  };
+  useEffect(() => {
+    bottomSheetRef.current?.snapToIndex(0);
+  }, [])
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Header */}
       {/* <Header
         leftComponent={{ text: 'Name', style: { color: '#fff', fontSize: 18 } }}
@@ -23,66 +38,183 @@ const Dashboard = () => {
         }}
       /> */}
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Advertisement Cards */}
-        <ScrollView horizontal style={{ flexDirection: 'row' }}>
-
-          <Image source={{ uri: 'https://img.freepik.com/premium-vector/real-estate-web-banner-ad-design-business-advertising_701243-15.jpg' }} style={styles.adImages} />
-          <Image source={{ uri: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/business-banner-advertising-design-template-aebf779d2afa43bdb051accd03d708de_screen.jpg' }} style={styles.adImages} />
-          <Image source={{ uri: 'https://www.creativehatti.com/wp-content/uploads/edd/2022/02/Promote-your-business-with-digital-marketing-on-template-banner-24-large.jpg' }} style={styles.adImages} />
-          <Image source={{ uri: 'https://www.creativehatti.com/wp-content/uploads/edd/2022/03/Digital-marketing-agency-with-a-flat-template-banner-23-large.jpg' }} style={styles.adImages} />
-
-
+        <ScrollView horizontal style={{ flexDirection: "row", paddingLeft: 5 }}>
+          <Image
+            source={{
+              uri: "https://img.freepik.com/premium-vector/real-estate-web-banner-ad-design-business-advertising_701243-15.jpg",
+            }}
+            style={styles.adImages}
+          />
+          <Image
+            source={{
+              uri: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/business-banner-advertising-design-template-aebf779d2afa43bdb051accd03d708de_screen.jpg",
+            }}
+            style={styles.adImages}
+          />
+          <Image
+            source={{
+              uri: "https://www.creativehatti.com/wp-content/uploads/edd/2022/02/Promote-your-business-with-digital-marketing-on-template-banner-24-large.jpg",
+            }}
+            style={styles.adImages}
+          />
+          <Image
+            source={{
+              uri: "https://www.creativehatti.com/wp-content/uploads/edd/2022/03/Digital-marketing-agency-with-a-flat-template-banner-23-large.jpg",
+            }}
+            style={styles.adImages}
+          />
         </ScrollView>
         {/* Photos with View All */}
         <Card containerStyle={{ borderRadius: 15 }}>
           <ScrollView horizontal style={styles.photoRow}>
             <PreApproveIcon />
-            <Image source={{ uri: 'https://static.vecteezy.com/system/resources/previews/027/951/137/non_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png' }} style={styles.photo} />
-            <Image source={{ uri: 'https://static.vecteezy.com/system/resources/previews/028/238/588/non_2x/old-man-teacher-face-3d-profession-avatars-free-png.png' }} style={styles.photo} resizeMethod="scale" />
-            <Image source={{ uri: 'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png' }} style={styles.photo} resizeMethod="scale" />
-            <Text style={styles.viewAll}>View All</Text>
+            <Image
+              source={{
+                uri: "https://static.vecteezy.com/system/resources/previews/027/951/137/non_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png",
+              }}
+              style={styles.photo}
+            />
+            {/* <Image
+              source={{
+                uri: "https://static.vecteezy.com/system/resources/previews/028/238/588/non_2x/old-man-teacher-face-3d-profession-avatars-free-png.png",
+              }}
+              style={styles.photo}
+              resizeMethod="scale"
+            /> */}
+            <Image
+              source={{
+                uri: "https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png",
+              }}
+              style={styles.photo}
+              resizeMethod="scale"
+            />
+            <DailyHelpIcon />
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <Icon
+                name="rightcircle"
+                type="antdesign"
+                size={35}
+                color={"#CCC"}
+              />
+              <Text style={styles.viewAll}>{'View All'}</Text>
+            </View>
           </ScrollView>
         </Card>
 
         {/* Row with Title and Subtitle */}
         <Card containerStyle={{ borderRadius: 15 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignContent: 'center', }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignContent: "center",
+            }}
+          >
             <View>
               <Text style={styles.cardTitle}>FlatCheck Offers</Text>
-              <Text style={styles.cardSubtitle}>Unlock the future of flats</Text>
+              <Text style={styles.cardSubtitle}>
+                Unlock the future of flats
+              </Text>
             </View>
             <View>
-              <Image source={{ uri: 'https://www.shutterstock.com/shutterstock/photos/2180594735/display_1500/stock-vector-black-bulb-with-checkmark-like-quick-tip-icon-flat-stroke-linear-simple-trend-modern-efficiency-2180594735.jpg' }} width={40} height={40} />
+              <Image
+                source={{
+                  uri: "https://www.shutterstock.com/shutterstock/photos/2180594735/display_1500/stock-vector-black-bulb-with-checkmark-like-quick-tip-icon-flat-stroke-linear-simple-trend-modern-efficiency-2180594735.jpg",
+                }}
+                width={40}
+                height={40}
+              />
             </View>
           </View>
         </Card>
 
         {/* Horizontal Scroll with Icons */}
         <ScrollView horizontal style={styles.horizontalScroll}>
-          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Card containerStyle={styles.smallCard}>
-              <Icon name="chatbox-ellipses-outline" size={35} type="ionicon" color="#444" />
+              <Icon
+                name="chatbox-ellipses-outline"
+                size={35}
+                type="ionicon"
+                color="#444"
+              />
             </Card>
-            <Text style={{ marginTop: 5 }}>Ask Society</Text>
+            <Text style={styles.smallIconsText}>Ask Society</Text>
           </View>
-          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Card containerStyle={styles.smallCard}>
-              <Icon name="payment" size={35} type="material-icon" color="green" />
+              <Icon
+                name="payment"
+                size={35}
+                type="material-icon"
+                color="green"
+              />
             </Card>
-            <Text style={{ marginTop: 5 }}>Payment</Text>
+            <Text style={styles.smallIconsText}>Payment</Text>
           </View>
-          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Card containerStyle={styles.smallCard}>
-              <Icon name="people-outline" size={35} type="ionicon" color="#444" />
+              <Icon
+                name="people-outline"
+                size={35}
+                type="ionicon"
+                color="#26A"
+              />
             </Card>
-            <Text style={{ marginTop: 5 }}>Community</Text>
+            <Text style={styles.smallIconsText}>Community</Text>
           </View>
-          <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
             <Card containerStyle={styles.smallCard}>
-              <Icon name="miscellaneous-services" size={35} type="material-icons" color="#444" />
+              <Icon
+                name="miscellaneous-services"
+                size={35}
+                type="material-icons"
+                color="#444"
+              />
             </Card>
-            <Text style={{ marginTop: 5 }}>Settings</Text>
+            <Text style={styles.smallIconsText}>Settings</Text>
+          </View>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <Card containerStyle={styles.smallCard}>
+              <Icon
+                name="documents-outline"
+                size={35}
+                type="ionicon"
+                color="#444"
+              />
+            </Card>
+            <Text style={styles.smallIconsText}>Documents</Text>
+          </View>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <Card containerStyle={styles.smallCard}>
+              <Icon
+                name="medical-services"
+                size={35}
+                type="material-icons"
+                color="#444"
+              />
+            </Card>
+            <Text style={styles.smallIconsText}>Services</Text>
+          </View>
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <Card containerStyle={styles.smallCard}>
+              <Icon
+                name="car-sport"
+                size={35}
+                type="ionicon"
+                color="#444"
+              />
+            </Card>
+            <Text style={styles.smallIconsText}>Vehicle Services</Text>
           </View>
 
         </ScrollView>
@@ -92,12 +224,7 @@ const Dashboard = () => {
           <View style={styles.detailedCardHeader}>
             <View>
               <Icon name="bell" size={30} type="font-awesome" />
-              <Badge
-                value="3"
-                status="success"
-                containerStyle={styles.badge}
-
-              />
+              <Badge value="3" status="success" containerStyle={styles.badge} />
             </View>
             <View style={styles.headerText}>
               <Text style={styles.cardTitle}>Notice</Text>
@@ -106,19 +233,18 @@ const Dashboard = () => {
             <Icon name="ellipsis-vertical" type="ionicon" />
           </View>
           <Card.Divider />
-          <Text style={styles.cardBody}>This is a notice to everyone as a precautionary measure to fix all the security issues going on in the Society. Please cooperate with RWA.</Text>
+          <Text style={styles.cardBody}>
+            This is a notice to everyone as a precautionary measure to fix all
+            the security issues going on in the Society. Please cooperate with
+            RWA.
+          </Text>
         </Card>
 
         <Card containerStyle={{ borderRadius: 15 }}>
           <View style={styles.detailedCardHeader}>
             <View>
               <Icon name="bell" size={30} type="font-awesome" />
-              <Badge
-                value="3"
-                status="success"
-                containerStyle={styles.badge}
-
-              />
+              <Badge value="3" status="success" containerStyle={styles.badge} />
             </View>
             <View style={styles.headerText}>
               <Text style={styles.cardTitle}>Notice</Text>
@@ -127,18 +253,17 @@ const Dashboard = () => {
             <Icon name="ellipsis-vertical" type="ionicon" />
           </View>
           <Card.Divider />
-          <Text style={styles.cardBody}>This is a notice to everyone as a precautionary measure to fix all the security issues going on in the Society. Please cooperate with RWA.</Text>
+          <Text style={styles.cardBody}>
+            This is a notice to everyone as a precautionary measure to fix all
+            the security issues going on in the Society. Please cooperate with
+            RWA.
+          </Text>
         </Card>
         <Card containerStyle={{ borderRadius: 15 }}>
           <View style={styles.detailedCardHeader}>
             <View>
               <Icon name="bell" size={30} type="font-awesome" />
-              <Badge
-                value="3"
-                status="success"
-                containerStyle={styles.badge}
-
-              />
+              <Badge value="3" status="success" containerStyle={styles.badge} />
             </View>
             <View style={styles.headerText}>
               <Text style={styles.cardTitle}>Notice</Text>
@@ -147,18 +272,17 @@ const Dashboard = () => {
             <Icon name="ellipsis-vertical" type="ionicon" />
           </View>
           <Card.Divider />
-          <Text style={styles.cardBody}>This is a notice to everyone as a precautionary measure to fix all the security issues going on in the Society. Please cooperate with RWA.</Text>
+          <Text style={styles.cardBody}>
+            This is a notice to everyone as a precautionary measure to fix all
+            the security issues going on in the Society. Please cooperate with
+            RWA.
+          </Text>
         </Card>
         <Card containerStyle={{ borderRadius: 15 }}>
           <View style={styles.detailedCardHeader}>
             <View>
               <Icon name="bell" size={30} type="font-awesome" />
-              <Badge
-                value="3"
-                status="success"
-                containerStyle={styles.badge}
-
-              />
+              <Badge value="3" status="success" containerStyle={styles.badge} />
             </View>
             <View style={styles.headerText}>
               <Text style={styles.cardTitle}>Notice</Text>
@@ -167,130 +291,36 @@ const Dashboard = () => {
             <Icon name="ellipsis-vertical" type="ionicon" />
           </View>
           <Card.Divider />
-          <Text style={styles.cardBody}>This is a notice to everyone as a precautionary measure to fix all the security issues going on in the Society. Please cooperate with RWA.</Text>
+          <Text style={styles.cardBody}>
+            This is a notice to everyone as a precautionary measure to fix all
+            the security issues going on in the Society. Please cooperate with
+            RWA.
+          </Text>
         </Card>
 
         {/* Add more detailed cards as needed */}
       </ScrollView>
-    </View>
-    // <View style={{ flex: 1, paddingTop: 20, paddingHorizontal: 24 }}>
-    //   <View
-    //     style={{
-    //       padding: 20,
-    //       borderWidth: 1,
-    //       borderRadius: 20,
-    //       backgroundColor: "#ddd",
-    //       width: "100%",
-    //     }}
-    //   >
-    //     <View
-    //       style={{
-    //         flexDirection: "row",
-    //         justifyContent: "space-between",
-    //         paddingVertical: 8,
-    //       }}
-    //     >
-    //       <Text>Exams Appeared</Text>
-    //       <Text>20</Text>
-    //     </View>
-    //     <View
-    //       style={{ borderWidth: 1, borderStyle: "dashed", borderColor: "#222" }}
-    //     ></View>
-    //     <View
-    //       style={{
-    //         flexDirection: "row",
-    //         justifyContent: "space-between",
-    //         paddingVertical: 8,
-    //       }}
-    //     >
-    //       <Text>Exams Passed</Text>
-    //       <Text>10</Text>
-    //     </View>
-    //     <View
-    //       style={{ borderWidth: 1, borderStyle: "dashed", borderColor: "#222" }}
-    //     ></View>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 18,
+          right: 18,
+          backgroundColor: "#26A",
+          borderRadius: 50,
+          height: 50,
+          width: 50,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <TouchableWithoutFeedback onPress={() => openBottomSheet(1)}>
+          <Icon name="add" type="ionicons" color="#FFF" size={30} /></TouchableWithoutFeedback>
+      </View>
+      <BottomSheetComponent ref={bottomSheetRef} />
+    </SafeAreaView>
 
-    //     <View
-    //       style={{
-    //         flexDirection: "row",
-    //         justifyContent: "space-between",
-    //         paddingVertical: 8,
-    //       }}
-    //     >
-    //       <Text>Exams Failed</Text>
-    //       <Text>10</Text>
-    //     </View>
-    //   </View>
-    // </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  headerRight: {
-    flexDirection: 'row',
-  },
-  headerIcon: {
-    marginLeft: 10,
-  },
-  photoRow: {
-    flexDirection: 'row',
-  },
-  adImages: { resizeMode: 'cover', width: 90, height: 90, marginHorizontal: 10, marginVertical: 10, borderRadius: 15 },
-  photo: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-    borderRadius: 50,
-    resizeMode: 'contain'
-  },
-  viewAll: {
-    color: '#3D6DCC',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  cardTitle: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-  cardSubtitle: {
-    fontSize: 14,
-    color: 'gray',
-  },
-  horizontalScroll: {
-    marginVertical: 10,
-    marginHorizontal: 10
-  },
-  smallCard: {
-    padding: 10,
-    margin: 5,
-    borderRadius: 15,
-    width: 70,
-    height: 70,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  detailedCardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingBottom: 10
-  },
-  headerText: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  badge: {
-    position: 'absolute',
-    top: -4,
-    right: -4,
-  },
-  cardBody: {
-    marginTop: 0,
-  },
-});
 
 
 export default Dashboard;
