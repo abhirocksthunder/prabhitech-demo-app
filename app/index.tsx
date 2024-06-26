@@ -11,14 +11,13 @@ import {
 } from "react-native";
 import { Input, Button, Icon, InputProps } from "@rneui/themed";
 import axios from "axios";
-import { API_URL } from "@/constants/Constants";
 import { router } from "expo-router";
 import * as LocalAuthentication from "expo-local-authentication";
 import * as SecureStore from "expo-secure-store";
-import FullPageLoader from "@/components/FullPageLoader";
 import * as SplashScreen from "expo-splash-screen";
 import { useDispatch } from "react-redux";
 import { loginRequest, loginSuccess } from "@/redux/reducers/authSlice";
+import { API_URL } from "@/constants/Constants";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -50,7 +49,7 @@ SplashScreen.preventAutoHideAsync();
 const LoginScreen: React.FunctionComponent<LoginScreenState> = (
   props: LoginScreenProps
 ) => {
-  const {} = props;
+  const { } = props;
   const [isLoading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
@@ -120,7 +119,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
       if (!!token) {
         const { user } = await retrieveData();
         const biometricAuth = await LocalAuthentication.authenticateAsync({
-          promptMessage: "Login to SkillTech",
+          promptMessage: "Login to PrabhiTech", // Abhilash:
           disableDeviceFallback: true,
           cancelLabel: "Cancel",
         });
@@ -284,7 +283,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
               title={"Forgot Password ?"}
               titleStyle={{ color: "white" }}
               buttonStyle={{ backgroundColor: "transparent" }}
-              onPress={() => {}}
+              onPress={() => { }}
             />
           </View>
         </View>
