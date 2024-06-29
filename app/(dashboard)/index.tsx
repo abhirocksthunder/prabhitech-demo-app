@@ -8,6 +8,7 @@ import BottomSheetComponent from "@/components/BottomsheetComponent";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { router } from "expo-router";
 
 
 const Dashboard = () => {
@@ -20,7 +21,7 @@ const Dashboard = () => {
     bottomSheetRef.current?.snapToIndex(0);
   }, [])
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       {/* <Header
         leftComponent={{ text: 'Name', style: { color: '#fff', fontSize: 18 } }}
@@ -91,21 +92,23 @@ const Dashboard = () => {
               resizeMethod="scale"
             />
             <DailyHelpIcon />
-            <View
-              style={{
-                flexDirection: "column",
-                justifyContent: "center",
-                marginLeft: 10,
-              }}
-            >
-              <Icon
-                name="rightcircle"
-                type="antdesign"
-                size={35}
-                color={"#CCC"}
-              />
-              <Text style={styles.viewAll}>{'View All'}</Text>
-            </View>
+            <TouchableWithoutFeedback onPress={() => router.push('/ViewAllActivities')}>
+              <View
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  marginLeft: 10,
+                }}
+              >
+                <Icon
+                  name="rightcircle"
+                  type="antdesign"
+                  size={35}
+                  color={"#CCC"}
+                />
+                <Text style={styles.viewAll}>{'View All'}</Text>
+              </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
         </Card>
 
@@ -317,7 +320,7 @@ const Dashboard = () => {
           <Icon name="add" type="ionicons" color="#FFF" size={30} /></TouchableWithoutFeedback>
       </View>
       <BottomSheetComponent ref={bottomSheetRef} />
-    </SafeAreaView>
+    </View>
 
   );
 };

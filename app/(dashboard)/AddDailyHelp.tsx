@@ -1,6 +1,8 @@
+import { faker } from '@faker-js/faker';
 import { Icon, ListItem } from '@rneui/base';
+import { router } from 'expo-router';
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 
 interface Item {
     id: number;
@@ -9,26 +11,26 @@ interface Item {
 }
 
 const data: Item[] = [
-    { id: 1, title: "Maid", count: 90 },
-    { id: 2, title: "Cook", count: 20 },
-    { id: 3, title: "Milkman", count: 15 },
-    { id: 4, title: "Paperboy", count: 25 },
-    { id: 5, title: "Car Cleaner", count: 35 },
-    { id: 6, title: "Nanny", count: 52 },
-    { id: 7, title: "Gym Instructor", count: 41 },
-    { id: 8, title: "Laundry", count: 41 },
-    { id: 9, title: "Full Time Nanny", count: 54 },
-    { id: 10, title: "Gardener", count: 2 },
-    { id: 11, title: "Security", count: 4 },
-    { id: 12, title: "Trainers", count: 74 },
-    { id: 13, title: "Helper", count: 41 },
+    { id: 1, title: "Maid", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 2, title: "Cook", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 3, title: "Milkman", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 4, title: "Paperboy", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 5, title: "Car Cleaner", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 6, title: "Nanny", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 7, title: "Gym Instructor", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 8, title: "Laundry", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 9, title: "Full Time Nanny", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 10, title: "Gardener", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 11, title: "Security", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 12, title: "Trainers", count: faker.number.int({ min: 1, max: 30 }) },
+    { id: 13, title: "Helper", count: faker.number.int({ min: 1, max: 30 }) },
     // Add more items as needed
     // Add more items as needed
 ];
 
 const AddDailyHelp: React.FC = () => {
     const renderItem = ({ item }: { item: Item }) => (
-        <ListItem bottomDivider>
+        <ListItem bottomDivider onPress={() => router.push({ pathname: "/DailyHelpers", params: item })}>
             <ListItem.Content>
                 <ListItem.Title>{item.title}</ListItem.Title>
             </ListItem.Content>

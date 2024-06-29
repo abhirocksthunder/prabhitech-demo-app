@@ -75,9 +75,9 @@ const BottomSheetComponent = forwardRef<BottomSheet, {}>((props, ref) => {
                 {sections.map((section, index) => (
                     <View key={index} style={styles.sectionContainer}>
                         <Text style={styles.header}>{section.header}</Text>
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
                             {section.options.map((option) => (
-                                <View style={{ flexDirection: "column", alignItems: "center" }}>
+                                <View key={option.id} style={{ flexDirection: "column", alignItems: "center" }}>
                                     <Card key={option.id} containerStyle={styles.smallCard}>
                                         <Icon
                                             name={option.name}

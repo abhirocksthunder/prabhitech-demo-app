@@ -6,7 +6,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const DailyHelpIcon = () => {
     return (
-        <TouchableWithoutFeedback onPress={() => router.push("/AddDailyHelp")}><View style={styles.container}>
+        <TouchableWithoutFeedback onPress={() => router.navigate("/AddDailyHelp")}><View style={styles.container}>
             {/* Person Icon */}
 
             <Icon

@@ -11,11 +11,17 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "cSpell.words": [
+        "antdesign",
         "entypo",
+        "fontawesome",
+        "fontisto",
         "gorhom",
         "ionicon",
         "materialicon",
+        "octicon",
+        "rightcircle",
         "rneui",
+        "viewallactivities",
         "zocial"
     ]
 }

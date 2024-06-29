@@ -25,9 +25,7 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-
-
+    <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.profileSection}>
           <Avatar
@@ -90,7 +88,7 @@ const Profile: React.FC = () => {
           onPress={() => console.log('Call button pressed')}
         />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

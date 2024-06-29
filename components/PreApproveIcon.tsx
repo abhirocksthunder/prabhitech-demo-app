@@ -1,26 +1,59 @@
 import { Icon } from "@rneui/base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, Text, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 import ApprovalModal from "./ApprovalModal";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Audio } from "expo-av";
 
 const PreApproveIcon = () => {
     const [isModalVisible, setModalVisible] = useState(false);
+    const [sound, setSound] = useState<Audio.Sound | null>(null);
+
+    const playSound = async () => {
+        // Load the sound file
+        const { sound } = await Audio.Sound.createAsync(
+            require('@/assets/sounds/ring-ring.mp3')
+        );
+        setSound(sound);
+        // Play the sound
+        await sound.playAsync();
+    };
+
+    const stopSound = async () => {
+        // Load the sound file
+        const { sound } = await Audio.Sound.createAsync(
+            require('@/assets/sounds/ring-ring.mp3')
+        );
+        setSound(sound);
+        // Play the sound
+        await sound.unloadAsync();
+    };
+    useEffect(() => {
+        return sound
+            ? () => {
+                // Clean up the sound when component unmounts
+                sound.unloadAsync();
+            }
+            : undefined;
+    }, [sound])
 
     const handleApprove = () => {
         setModalVisible(false);
+        stopSound();
         // Handle the approve action
         console.log('Visitor Approved');
     };
 
     const handleDeny = () => {
         setModalVisible(false);
+        stopSound();
         // Handle the deny action
         console.log('Visitor Denied');
     };
 
     const handleLeaveAtGate = () => {
         setModalVisible(false);
+        stopSound();
         // Handle the leave at gate action
         console.log('Leave at Gate');
     };
@@ -28,13 +61,13 @@ const PreApproveIcon = () => {
         <View style={styles.container}>
             <ApprovalModal
                 isVisible={isModalVisible}
-                onClose={() => setModalVisible(false)}
+                onClose={() => { setModalVisible(false); stopSound(); }}
                 onApprove={handleApprove}
                 onDeny={handleDeny}
                 onLeaveAtGate={handleLeaveAtGate}
             />
             {/* Person Icon */}
-            <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+            <TouchableWithoutFeedback onPress={() => { setModalVisible(true); playSound(); }}>
                 <Icon
                     // source={{ uri: 'https://img.icons8.com/ios-filled/100/000000/person-male.png' }}
                     name="person"
