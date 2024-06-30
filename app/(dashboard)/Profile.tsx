@@ -1,10 +1,12 @@
 // ProfileScreen.tsx
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Avatar, Input, Button, Icon, Card } from '@rneui/base';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import lightPalette from '@/themes/lightPalette';
+import * as SecureStore from "expo-secure-store";
+import { router } from "expo-router";
 
 const Profile: React.FC = () => {
   const [bio, setBio] = useState<string>('This is a sample bio.');
@@ -22,6 +24,12 @@ const Profile: React.FC = () => {
   const handleShare = () => {
     // Add sharing functionality
     console.log('Share Profile');
+  };
+
+  const logout = async () => {
+    await SecureStore.deleteItemAsync("authToken");
+    await SecureStore.deleteItemAsync("userData");
+    router.push("/");
   };
 
   return (
@@ -85,7 +93,13 @@ const Profile: React.FC = () => {
           title="Enable Calling"
           icon={<Ionicons name="call-outline" size={24} color="white" />}
           buttonStyle={styles.callButton}
-          onPress={() => console.log('Call button pressed')}
+          onPress={() => Alert.alert('Calling enabled')}
+        />
+        <Button
+          title="Logout"
+          icon={<Icon name="logout" type="material-community" size={24} color="white" />}
+          buttonStyle={styles.callButton}
+          onPress={logout}
         />
       </ScrollView>
     </View>

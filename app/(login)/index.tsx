@@ -80,7 +80,8 @@ const LoginScreen2: React.FunctionComponent<LoginScreen2Props> = () => {
       setTimeout(() => {
         LayoutAnimation.easeInEaseOut();
         setLoading(false);
-        Alert.alert("🎸", "You rock");
+        Alert.alert("🎸", "Registered Successfully");
+        router.push("/")
       }, 1500);
     }
   };
@@ -129,9 +130,9 @@ const LoginScreen2: React.FunctionComponent<LoginScreen2Props> = () => {
       keyboardShouldPersistTaps="handled"
       contentContainerStyle={styles.container}
     >
-      <Text style={styles.welcomeText}>Welcome to SkillTech</Text>
+      <Text style={styles.welcomeText}>Welcome to PrabhiTech</Text>
       <Text style={styles.signUpText}>Register</Text>
-      <Text style={styles.whoAreYouText}>WHO YOU ARE ?</Text>
+      {/* <Text style={styles.whoAreYouText}>WHO YOU ARE ?</Text>
       <View style={styles.userTypesContainer}>
         <UserTypeItem
           label="Instructor"
@@ -147,7 +148,7 @@ const LoginScreen2: React.FunctionComponent<LoginScreen2Props> = () => {
           onPress={() => selectedTypeHandler("child")}
           selected={selectedType === "child"}
         />
-      </View>
+      </View> */}
       <View style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
         <FormInput
           refInput={(input) => (usernameInput = input)}
@@ -235,7 +236,7 @@ const LoginScreen2: React.FunctionComponent<LoginScreen2Props> = () => {
           titleStyle={styles.loginHereText}
           containerStyle={{ flex: -1 }}
           buttonStyle={{ backgroundColor: "transparent" }}
-          onPress={() => router.replace("/Login")}
+          onPress={() => router.replace("/")}
         />
       </View>
     </ScrollView>

@@ -18,6 +18,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useDispatch } from "react-redux";
 import { loginRequest, loginSuccess } from "@/redux/reducers/authSlice";
 import { API_URL } from "@/constants/Constants";
+import lightPalette from "@/themes/lightPalette";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -49,7 +50,7 @@ SplashScreen.preventAutoHideAsync();
 const LoginScreen: React.FunctionComponent<LoginScreenState> = (
   props: LoginScreenProps
 ) => {
-  const {} = props;
+  const { } = props;
   const [isLoading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [isEmailValid, setEmailValid] = useState<boolean>(true);
@@ -81,11 +82,19 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
 
   const dispatch = useDispatch();
 
+  // const storeData = async (userDetails: any) => {
+  //   await SecureStore.setItemAsync("authToken", userDetails.token);
+  //   await SecureStore.setItemAsync(
+  //     "userData",
+  //     JSON.stringify(userDetails.user)
+  //   );
+  // };
+
   const storeData = async (userDetails: any) => {
-    await SecureStore.setItemAsync("authToken", userDetails.token);
+    await SecureStore.setItemAsync("authToken", "token");
     await SecureStore.setItemAsync(
       "userData",
-      JSON.stringify(userDetails.user)
+      JSON.stringify("Abhilash Somisetty")
     );
   };
 
@@ -132,7 +141,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
       } else {
         setAppIsReady(true);
         await SplashScreen.hideAsync();
-        router.replace("/(dashboard)");
+        //router.replace("/(dashboard)");
       }
     } catch (error) {
       console.log(error);
@@ -145,7 +154,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
   const login = () => {
     setLoading(true);
     // Simulate an API call
-    setTimeout(() => {
+    setTimeout(async () => {
       const isEmailValidFlag = validateEmail(email);
       const isPasswordValidFlag = password.length >= 6;
 
@@ -154,23 +163,23 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
       setEmailValid(isEmailValidFlag);
       setPasswordValid(isPasswordValidFlag);
       if (isEmailValidFlag && isPasswordValidFlag) {
-        axios
-          .post(`${API_URL}/v1/auth/login`, {
-            email: email,
-            password: password,
-          })
-          .then(async (res) => {
-            const { user, token } = await res.data;
-            dispatch(loginSuccess(res.data));
-            if (token) {
-              await storeData(res.data);
-            }
-            authHandler();
-          })
-          .catch((err) => {
-            // setMessage(err.response.data.msg);
-            console.log("error======>", err);
-          });
+        // axios
+        //   .post(`${API_URL}/v1/auth/login`, {
+        //     email: email,
+        //     password: password,
+        //   })
+        //   .then(async (res) => {
+        //     const { user, token } = await res.data;
+        //     dispatch(loginSuccess(res.data));
+        //     if (token) {
+        await storeData("");
+        //     }
+        authHandler();
+        // })
+        // .catch((err) => {
+        //   // setMessage(err.response.data.msg);
+        //   console.log("error======>", err);
+        // });
       }
     }, 1500);
   };
@@ -192,14 +201,14 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
               <Text style={styles.titleText}>Welcome to</Text>
             </View>
             <View style={{ marginLeft: 10 }}>
-              <Text style={styles.titleText}>Skill Tech</Text>
+              <Text style={styles.titleText}>PrabhiTech</Text>
             </View>
           </View>
           <View style={{ flexDirection: "row" }}>
             <Button
-              disabled={isLoading}
+              // disabled={isLoading}
               type="clear"
-              activeOpacity={0.7}
+              // activeOpacity={0.7}
               onPress={() => selectCategory(0)}
               containerStyle={{ flex: 1 }}
               titleStyle={[styles.categoryText, styles.selectedCategoryText]}
@@ -284,7 +293,15 @@ const LoginScreen: React.FunctionComponent<LoginScreenState> = (
               title={"Forgot Password ?"}
               titleStyle={{ color: "white" }}
               buttonStyle={{ backgroundColor: "transparent" }}
-              onPress={() => {}}
+              onPress={() => { }}
+            />
+          </View>
+          <View style={styles.helpContainer}>
+            <Button
+              title={"New? Register here"}
+              titleStyle={{ color: "white", textDecorationLine: 'underline' }}
+              buttonStyle={{ backgroundColor: 'transparent', }}
+              onPress={() => { router.push("(login)") }}
             />
           </View>
         </View>

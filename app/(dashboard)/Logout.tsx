@@ -7,6 +7,7 @@ const Logout = () => {
   useEffect(() => {
     const logout = async () => {
       await SecureStore.deleteItemAsync("authToken");
+      await SecureStore.deleteItemAsync("userData");
       router.push("/");
     };
     logout();
